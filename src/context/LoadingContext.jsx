@@ -7,7 +7,7 @@ const LoadingContext = createContext();
 
 export const LoadingProvider = ({ children }) => {
   const initialState = {
-    loading: true,
+    loading: false,
   };
 
   const setLoadingFalse = () => {

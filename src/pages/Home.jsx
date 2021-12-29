@@ -1,5 +1,4 @@
 // LIB
-// import { Link } from "react-router-dom";
 import { rowRequests } from "../context/endpoints/endpoints";
 
 // COMP
@@ -12,7 +11,7 @@ function Home() {
     <div className="relative flex flex-col overflow-x-hidden">
       {/* NAV */}
       <Navbar />
-      <Banner />
+      <Banner homePage />
       <h1 className="ml-8 mt-4 text-4xl">
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500">
           NETFLIX ORIGINALS

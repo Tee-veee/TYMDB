@@ -10,12 +10,14 @@ import LoadingContext from "../context/LoadingContext";
 // ENV
 const TMDB_FETCHURL = process.env.REACT_APP_TMDB_FETCHURL;
 
+// NOTES -- PROPS FROM MovieRow.jsx
 function MovieRow({ title, fetchUrl, isLargeRow }) {
   const [rowMovies, setRowMovies] = useState([]);
 
   const { loading, setLoadingFalse, setLoadingTrue } =
     useContext(LoadingContext);
 
+  // USES PROP FETCHURL TO CALL LIST OF MOVIES
   useEffect(() => {
     const getMovies = async (fetchUrl) => {
       setLoadingTrue();

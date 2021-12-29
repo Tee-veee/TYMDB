@@ -5,12 +5,10 @@ const movieReducer = (state, action) => {
   switch (action.type) {
     case "SET_TRUE":
       return {
-        ...state,
         loading: true,
       };
     case "SET_FALSE":
       return {
-        ...state,
         loading: false,
       };
     default:

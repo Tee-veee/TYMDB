@@ -12,11 +12,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // PAGES
-import Faq from "./pages/Faq";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 
 // STATE
+
 import { MovieProvider } from "./context/MovieContext";
 import { LoadingProvider } from "./context/LoadingContext";
 
@@ -30,8 +30,7 @@ function App() {
             {/* ROUTES FOR PAGE LINKS */}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/faq" element={<Faq />} />
-              <Route path="/moviedetails" element={<MovieDetails />} />
+              <Route path="/moviedetails/:movie" element={<MovieDetails />} />
             </Routes>
           </main>
         </Router>

@@ -1,48 +1,71 @@
 // LIB
 import { useContext, useEffect, useState } from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
+import {
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+} from "react-icons/bs";
 
 // CONTEXT
 import MovieContext from "../context/MovieContext";
 
-// DATA
-import { detailRequests } from "../context/endpoints/endpoints";
-
-const TMDB_FETCHURL = process.env.REACT_APP_TMDB_FETCHURL;
-
 function Modal({ modal, setModal }) {
   const [url, setUrl] = useState("");
   const [errorText, setErrorText] = useState("");
+  const [trailerIndex, setTrailerIndex] = useState(0);
+
   const { movie } = useContext(MovieContext);
 
-  useEffect(() => {
-    // NOTES TODO -- REFACTOR CODE INTO MOVIE CONTEXT
+  // NOTES GETS LIST OF VIDEOS FROM MOVIES
+  const movieVideos = movie.videos.results;
+  // NOTES FILTERS LIST SO ONLY RETURNS TRAILERS
+  const trailers = movieVideos.filter((video) => {
+    return video.type === "Trailer";
+  });
 
-    const getMovieDetails = async () => {
-      const response = await fetch(
-        `${TMDB_FETCHURL}/tv/${movie[0].id}${detailRequests.fetchDetailTv}`
-      );
-
-      const responseData = await response.json();
-      console.log(responseData);
-      if (responseData.videos.results.length === 0) {
-        setErrorText("No Videos Available");
-        setUrl("");
-      } else {
-        // NOTES TODO -- WRITE FUNCTION THAT LOOPS THROUGH VID ARRAY AND CHECKS TEXT FOR 'OFFICIAL TRAILER' -> THEN SELECTS THAT VIDEO
-        const url =
-          "https://www.youtube.com/embed/" +
-          responseData.videos.results[0].key +
-          "?autoplay=1&controls=1";
-
-        setUrl(url);
-        setErrorText("");
-        return;
+  // NOTES CHANGES INDEX onClick, WHICH IN TURN CHANGES URL LINK WHICH SELECTS WHICH VIDEO IS BEING PLAYED
+  const setNewIndex = (dir) => {
+    const trailerLen = trailers.length;
+    const currIndex = trailerIndex;
+    if (trailerLen <= 1) {
+      return;
+    } else {
+      switch (dir) {
+        case "left":
+          if (currIndex === 0) {
+            setTrailerIndex(trailerLen - 1);
+            const url = `https://www.youtube.com/embed/${trailers[trailerIndex].key}?autoplay=1&controls=1`;
+            return setUrl(url);
+          } else {
+            setTrailerIndex(currIndex - 1);
+            const url = `https://www.youtube.com/embed/${trailers[trailerIndex].key}?autoplay=1&controls=1`;
+            return setUrl(url);
+          }
+        case "right":
+          if (currIndex === trailerLen - 1) {
+            setTrailerIndex(0);
+            const url = `https://www.youtube.com/embed/${trailers[trailerIndex].key}?autoplay=1&controls=1`;
+            return setUrl(url);
+          } else {
+            setTrailerIndex(currIndex + 1);
+            const url = `https://www.youtube.com/embed/${trailers[trailerIndex].key}?autoplay=1&controls=1`;
+            return setUrl(url);
+          }
       }
-    };
-    getMovieDetails();
+    }
+  };
+
+  // CHECKS IF THERE IS ANY AVAILABLE TRAILERS IF NOT SHOW ERROR TEXT ELSE SHOW VIDEO OF INDEX[1]
+  useEffect(() => {
+    if (trailers.length === 0) {
+      setErrorText("No Trailers Available");
+    } else {
+      const url = `https://www.youtube.com/embed/${trailers[trailerIndex].key}?autoplay=1&controls=1`;
+      setUrl(url);
+    }
   }, []);
 
+  // CLOSE MODAL ON ESC
   window.addEventListener("keydown", (e) => {
     if (e.code === "Escape") {
       if (modal) return setModal(false);
@@ -51,13 +74,31 @@ function Modal({ modal, setModal }) {
   });
 
   return (
-    <div className="fixed flex items-center justify-center top-0 w-full h-screen bg-black z-10">
+    <div className="fixed flex items-center justify-center top-0 w-full h-screen bg-black z-10 overflow-hidden">
       <button
         className="absolute top-[16px] right-[16px] flex text-sm md:text-xl items-center p-4 bg-black hover:bg-gradient-to-r from-cyan-500 to-blue-500"
         onClick={() => setModal(!modal)}
       >
         <AiFillCloseSquare className="text-3xl" />
       </button>
+      {trailers.length > 1 && (
+        <>
+          <button
+            className="absolute top-[46%] left-[10rem] flex text-sm md:text-xl items-center p-4 bg-black bg-gradient-to-r from-cyan-500 to-blue-500"
+            id="nextLeft"
+            onClick={() => setNewIndex("left")}
+          >
+            <BsFillArrowLeftSquareFill />
+          </button>
+          <button
+            className="absolute top-[46%] right-[10rem] flex text-sm md:text-xl items-center p-4 bg-black bg-gradient-to-r from-cyan-500 to-blue-500"
+            id="nextRight"
+            onClick={() => setNewIndex("right")}
+          >
+            <BsFillArrowRightSquareFill />
+          </button>
+        </>
+      )}
       {url && (
         <>
           <iframe
