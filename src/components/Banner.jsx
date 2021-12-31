@@ -64,20 +64,22 @@ function Banner({ homePage }) {
           movie.backdrop_path ? movie.backdrop_path : movie.poster_path
         })`,
         backgroundPosition: "90% 10%",
+        backgroundRepeat: "no-repeat",
+        objectFit: "cover",
       }}
     >
-      {modal && <Modal modal={modal} setModal={setModal} />}
+      {modal && <Modal modal={modal} setModal={setModal} banner />}
       <div className="p-4 md:p-12 h-full">
         <h1 className="text-md md:text-4xl pt-4 pb-2 mt-8 px-4 w-fit opacity-95 bg-gradient-to-r from-cyan-500 to-blue-500">
           {movie?.name || movie?.title || movie?.original_name}
         </h1>
         {homePage && (
           <>
-            <div className="text-xs md:text-xl bg-black w-9/12 md:w-4/12 p-4 mt-2">
+            <div className="text-xs md:text-xl bg-black w-9/12 md:w-4/12 p-4 mt-4">
               <h3>{truncateStr(movie?.overview, 180)}</h3>
             </div>
 
-            <div className="flex mt-2 w-fit">
+            <div className="flex mt-4 w-fit">
               <button
                 className="flex text-sm md:text-xl items-center p-4 bg-black  hover:bg-gradient-to-r from-cyan-500 to-blue-500"
                 onClick={() => setModal(true)}
@@ -90,7 +92,7 @@ function Banner({ homePage }) {
         )}
         {!homePage && (
           <>
-            <div className="flex mt-2 w-fit">
+            <div className="flex mt-4 w-fit">
               <button
                 className="flex text-sm md:text-xl items-center p-4 bg-black  hover:bg-gradient-to-r from-cyan-500 to-blue-500"
                 onClick={() => setModal(true)}

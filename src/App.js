@@ -14,26 +14,34 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // PAGES
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
+import PersonDetails from "./pages/PersonDetails";
 
 // STATE
 
 import { MovieProvider } from "./context/MovieContext";
 import { LoadingProvider } from "./context/LoadingContext";
+import { PersonProvider } from "./context/PersonContext";
 
 function App() {
   return (
     // STATE CONTEXT FOR MOVIES
     <LoadingProvider>
       <MovieProvider>
-        <Router>
-          <main className="flex bg-black text-white min-h-screen font-defaultFont">
-            {/* ROUTES FOR PAGE LINKS */}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/moviedetails/:movie" element={<MovieDetails />} />
-            </Routes>
-          </main>
-        </Router>
+        <PersonProvider>
+          <Router>
+            <main className="flex bg-black text-white min-h-screen font-defaultFont">
+              {/* ROUTES FOR PAGE LINKS */}
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/moviedetails/:movie" element={<MovieDetails />} />
+                <Route
+                  path="/persondetails/:person"
+                  element={<PersonDetails />}
+                />
+              </Routes>
+            </main>
+          </Router>
+        </PersonProvider>
       </MovieProvider>
     </LoadingProvider>
   );

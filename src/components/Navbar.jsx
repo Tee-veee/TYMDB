@@ -8,18 +8,17 @@ function Navbar() {
   const [showNavBg, setShowNavBg] = useState(false);
 
   // IF Y-AXIS > 400px CHANGE STATE
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 400) {
-        setShowNavBg(true);
-      } else {
-        setShowNavBg(false);
-      }
-      return () => {
-        window.removeEventListener("scroll");
-      };
-    });
-  }, []);
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 520) {
+      setShowNavBg(true);
+    } else {
+      setShowNavBg(false);
+    }
+    return () => {
+      window.removeEventListener("scroll");
+    };
+  });
 
   return (
     <nav className="fixed top-0 w-full px-12 h-[6vh] md:h-[5vh] z-10">
