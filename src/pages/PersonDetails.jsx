@@ -19,8 +19,7 @@ const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original/";
 function PersonDetails() {
   const [modal, setModal] = useState(false);
 
-  const { person, personCast, personCrew, getPerson } =
-    useContext(PersonContext);
+  const { person, personCast, getPerson } = useContext(PersonContext);
   const { movie, getMovie } = useContext(MovieContext);
   const { loading } = useContext(LoadingContext);
 

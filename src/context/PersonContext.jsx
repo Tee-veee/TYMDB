@@ -7,7 +7,7 @@ import { personRequests } from "./endpoints/endpoints";
 import personReducer from "./PersonReducer";
 
 import LoadingContext from "./LoadingContext";
-import Loading from "../components/Loading";
+
 // STATE
 const PersonContext = createContext();
 
