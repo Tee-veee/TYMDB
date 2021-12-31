@@ -1,5 +1,5 @@
 // LIB
-import { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 import movieReducer from "./MovieReducer";
 import LoadingContext from "./LoadingContext";
 // DATA

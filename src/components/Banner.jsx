@@ -1,5 +1,5 @@
 // LIB
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { MdLocalMovies } from "react-icons/md";
 
 // COMP

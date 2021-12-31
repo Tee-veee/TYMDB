@@ -1,5 +1,5 @@
 // LIB
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // STATE
 import MovieContext from "../context/MovieContext";
 import LoadingContext from "../context/LoadingContext";
