@@ -17,7 +17,6 @@ import MovieDetails from "./pages/MovieDetails";
 import PersonDetails from "./pages/PersonDetails";
 
 // STATE
-
 import { MovieProvider } from "./context/MovieContext";
 import { LoadingProvider } from "./context/LoadingContext";
 import { PersonProvider } from "./context/PersonContext";
@@ -25,10 +24,10 @@ import { PersonProvider } from "./context/PersonContext";
 function App() {
   return (
     // STATE CONTEXT FOR MOVIES
-    <LoadingProvider>
-      <MovieProvider>
-        <PersonProvider>
-          <Router>
+    <Router>
+      <LoadingProvider>
+        <MovieProvider>
+          <PersonProvider>
             <main className="flex bg-black text-white min-h-screen font-defaultFont">
               {/* ROUTES FOR PAGE LINKS */}
               <Routes>
@@ -40,10 +39,10 @@ function App() {
                 />
               </Routes>
             </main>
-          </Router>
-        </PersonProvider>
-      </MovieProvider>
-    </LoadingProvider>
+          </PersonProvider>
+        </MovieProvider>
+      </LoadingProvider>
+    </Router>
   );
 }
 

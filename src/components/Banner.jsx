@@ -1,6 +1,6 @@
 // LIB
 import { useContext, useState, useEffect } from "react";
-import { MdLocalMovies, MdMore } from "react-icons/md";
+import { MdLocalMovies } from "react-icons/md";
 
 // COMP
 import Loading from "./Loading";
@@ -37,16 +37,19 @@ function Banner({ homePage }) {
       setLoadingTrue();
       const getSessionData = () => {
         const sessionMovie = JSON.parse(sessionStorage.getItem("movie"));
+
         dispatchMovies({
           type: "SET_MOVIE",
           payload: sessionMovie,
         });
+
         return;
       };
       getSessionData();
       setLoadingFalse();
       return;
     }
+    /* eslint-disable-next-line */
   }, []);
 
   if (loading) {

@@ -1,6 +1,6 @@
 // LIB
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react/cjs/react.development";
+import { useContext } from "react/cjs/react.development";
 
 // STATE
 import MovieContext from "../context/MovieContext";

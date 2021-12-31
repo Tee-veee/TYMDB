@@ -1,7 +1,7 @@
 // LIB
 import { Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
-import { IoMdImage, IoMdVideocam } from "react-icons/io";
+import { IoMdImage } from "react-icons/io";
 
 // STATE
 import PersonContext from "../context/PersonContext";
@@ -43,10 +43,7 @@ function PersonDetails() {
         console.log("personUndefined--sessionPersonInit");
       }
     }
-  }, []);
-
-  useEffect(() => {
-    console.log(typeof personCast);
+    /* eslint-disable-next-line */
   }, []);
 
   if (loading) {
@@ -70,7 +67,7 @@ function PersonDetails() {
                   : movie.backdrop_path
               }`}
               className="h-[500px] w-[370px] object-cover"
-              alt="Profile"
+              alt="Profile - front on"
             />
           </div>
           <div className="flex flex-col w-full">
@@ -132,6 +129,7 @@ function PersonDetails() {
                           : person.profile_path
                       }`}
                       className="h-[150px] w-[100px] object-contain rounded-xl"
+                      alt="Movie Poster"
                     />
                     <div className="flex flex-col  px-4 w-full py-2 h-full">
                       <div className="flex w-full pt-2 items-center justify-between">

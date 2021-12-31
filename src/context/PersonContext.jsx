@@ -41,7 +41,6 @@ export const PersonProvider = ({ children }) => {
     const creditsCastArr = Object.keys(creditsData.cast).map(
       (key) => creditsData.cast[key]
     );
-    console.log(creditsCastArr);
 
     dispatchPerson({
       type: "SET_PERSON",

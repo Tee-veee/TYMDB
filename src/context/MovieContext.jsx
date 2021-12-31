@@ -1,5 +1,5 @@
 // LIB
-import { createContext, useReducer, useEffect, useContext } from "react";
+import { createContext, useReducer, useContext } from "react";
 import movieReducer from "./MovieReducer";
 import LoadingContext from "./LoadingContext";
 // DATA
@@ -15,8 +15,7 @@ export const MovieProvider = ({ children }) => {
     movie: {},
   };
 
-  const { loading, setLoadingFalse, setLoadingTrue } =
-    useContext(LoadingContext);
+  const { setLoadingFalse, setLoadingTrue } = useContext(LoadingContext);
 
   const [state, dispatchMovies] = useReducer(movieReducer, initialState);
 
@@ -42,13 +41,14 @@ export const MovieProvider = ({ children }) => {
     } else {
       randomMovie = dataResults.slice(randomNum - 1, randomNum);
     }
-
+    console.log("ranMovie", randomMovie);
     getMovie(randomMovie[0].id, randomMovie[0].release_date);
   };
 
   // GETS MOVIE DETAILS
   const getMovie = async (id, releaseDate) => {
     setLoadingTrue();
+    // IF MOVIE
     if (releaseDate) {
       const response = await fetch(
         `${TMDB_FETCHURL}/movie/${id}${detailRequests.fetchDetailMovie}`
@@ -69,8 +69,8 @@ export const MovieProvider = ({ children }) => {
       }
       setLoadingFalse();
       return;
-      // IF TV SHOW
     } else {
+      // IF TV SHOW
       const response = await fetch(
         `${TMDB_FETCHURL}/tv/${id}${detailRequests.fetchDetailTv}`
       );

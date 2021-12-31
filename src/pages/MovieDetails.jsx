@@ -12,11 +12,10 @@ import Banner from "../components/Banner";
 import Loading from "../components/Loading";
 import CastItem from "../components/CastItem";
 
+const TMDB_FETCHURL = process.env.REACT_APP_TMDB_FETCHURL;
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original/";
 
 function MovieDetails() {
-  const TMDB_FETCHURL = process.env.REACT_APP_TMDB_FETCHURL;
-
   const [castDetails, setCastDetails] = useState([]);
   const [crewDetails, setCrewDetails] = useState([]);
   const { movie } = useContext(MovieContext);
@@ -34,7 +33,7 @@ function MovieDetails() {
         setCrewDetails(dataResponse.crew);
 
         return;
-      } else {
+      } else if (!movie.release_date) {
         const response = await fetch(
           `${TMDB_FETCHURL}/tv/${movie.id}/credits${detailRequests.fetchTvCredits}`
         );
@@ -46,6 +45,7 @@ function MovieDetails() {
       }
     };
     getCredits();
+    /* eslint-disable-next-line */
   }, [movie]);
 
   if (loading) {
@@ -105,7 +105,6 @@ function MovieDetails() {
                         className="flex items-center w-full  mt-2 rounded-xl hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500  hover:transition-all cursor-pointer"
                         key={season.id}
                       >
-                        {console.log(season.id)}
                         <img
                           src={`${BASE_IMAGE_URL}${
                             season.poster_path

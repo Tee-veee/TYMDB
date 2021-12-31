@@ -57,6 +57,8 @@ function Modal({ modal, setModal, banner, person }) {
           setUrl(url);
           return;
         }
+      default:
+        return;
     }
   };
 
@@ -88,6 +90,8 @@ function Modal({ modal, setModal, banner, person }) {
           setImageUrl(url);
           return;
         }
+      default:
+        return;
     }
   };
 
@@ -113,6 +117,7 @@ function Modal({ modal, setModal, banner, person }) {
         setImageUrl(url);
       }
     }
+    /* eslint-disable-next-line */
   }, []);
 
   // CLOSE MODAL ON ESC
@@ -196,7 +201,11 @@ function Modal({ modal, setModal, banner, person }) {
               </button>
             </>
           )}
-          <img src={imageUrl} className="object-contain w-[400px] h-[666px]" />
+          <img
+            src={imageUrl}
+            className="object-contain w-[400px] h-[666px]"
+            alt="Person profile"
+          />
         </div>
       )}
     </>

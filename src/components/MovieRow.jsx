@@ -27,9 +27,10 @@ function MovieRow({ title, fetchUrl, isLargeRow }) {
       setRowMovies(data);
       setTimeout(() => {
         setLoadingFalse();
-      }, 1000);
+      }, 600);
     };
     getMovies(fetchUrl);
+    /* eslint-disable-next-line */
   }, []);
 
   if (loading) {
