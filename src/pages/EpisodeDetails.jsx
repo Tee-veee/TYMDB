@@ -14,7 +14,7 @@ import LoadingContext from "../context/LoadingContext";
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original/";
 
 function EpisodeDetails() {
-  const { movie, season, episode, getMovie, getSeason, getEpisode } =
+  const { movie, season, episode, getMovie, getSeason, getEpisode, getPerson } =
     useContext(MovieContext);
   const { loading } = useContext(LoadingContext);
 
@@ -115,6 +115,7 @@ function EpisodeDetails() {
                   <div
                     className="flex items-center w-full my-2 opacity-95 hover:bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl cursor-pointer"
                     key={guest.credit_id}
+                    onClick={() => getPerson(guest.id)}
                   >
                     <img
                       src={`${BASE_IMAGE_URL}${
@@ -147,6 +148,7 @@ function EpisodeDetails() {
                   <div
                     className="flex items-center w-full my-2 opacity-95 hover:bg-gradient-to-r from-pink-500 to-red-500 rounded-xl cursor-pointer"
                     key={crew.credit_id}
+                    onClick={() => getPerson(crew.id)}
                   >
                     <img
                       src={`${BASE_IMAGE_URL}${
