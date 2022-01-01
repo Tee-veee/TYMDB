@@ -102,6 +102,7 @@ function CollectionDetails() {
                               : movie.poster_path
                           }`}
                           className="h-[150px] w-[100px] object-contain rounded-xl"
+                          alt="Movie Poster"
                         />
                         <div className="flex flex-col ml-4">
                           <h1 className="mb-2 text-2xl">

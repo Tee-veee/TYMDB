@@ -1,11 +1,16 @@
 // COMP
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
+
 // LIB
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// STATE
 import MovieContext from "../context/MovieContext";
 import LoadingContext from "../context/LoadingContext";
-import Loading from "../components/Loading";
+
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original/";
 
 function EpisodeDetails() {
@@ -106,28 +111,30 @@ function EpisodeDetails() {
           {episode.guest_stars &&
             episode.guest_stars.map((guest) => {
               return (
-                <div
-                  className="flex items-center w-full my-2 opacity-95 hover:bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl cursor-pointer"
-                  key={guest.credit_id}
-                >
-                  <img
-                    src={`${BASE_IMAGE_URL}${
-                      guest.profile_path
-                        ? guest.profile_path
-                        : movie.poster_path
-                        ? movie.poster_path
-                        : movie.backdrop_path
-                    }`}
-                    className="h-[150px] w-[100px] object-contain rounded-xl"
-                    alt="Movie Poster"
-                  />
-                  <div className="flex flex-col justify-center  px-4 w-full py-2 h-full">
-                    <h1 className="mb-2 text-2xl">
-                      {guest.name ? guest.name : guest.original_name}
-                    </h1>
-                    <h1>{guest.character}</h1>
+                <Link to={`/persondetails/${guest.id}`}>
+                  <div
+                    className="flex items-center w-full my-2 opacity-95 hover:bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl cursor-pointer"
+                    key={guest.credit_id}
+                  >
+                    <img
+                      src={`${BASE_IMAGE_URL}${
+                        guest.profile_path
+                          ? guest.profile_path
+                          : movie.poster_path
+                          ? movie.poster_path
+                          : movie.backdrop_path
+                      }`}
+                      className="h-[150px] w-[100px] object-contain rounded-xl"
+                      alt="Movie Poster"
+                    />
+                    <div className="flex flex-col justify-center  px-4 w-full py-2 h-full">
+                      <h1 className="mb-2 text-2xl">
+                        {guest.name ? guest.name : guest.original_name}
+                      </h1>
+                      <h1>{guest.character}</h1>
+                    </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           <h1 className="p-4 opacity-95 w-fit my-2 bg-gradient-to-r from-pink-500 to-red-500 text-4xl">
@@ -136,28 +143,30 @@ function EpisodeDetails() {
           {episode.crew &&
             episode.crew.map((crew) => {
               return (
-                <div
-                  className="flex items-center w-full my-2 opacity-95 hover:bg-gradient-to-r from-pink-500 to-red-500 rounded-xl cursor-pointer"
-                  key={crew.credit_id}
-                >
-                  <img
-                    src={`${BASE_IMAGE_URL}${
-                      crew.profile_path
-                        ? crew.profile_path
-                        : movie.poster_path
-                        ? movie.poster_path
-                        : movie.backdrop_path
-                    }`}
-                    className="h-[150px] w-[100px] object-contain rounded-xl"
-                    alt="Movie Poster"
-                  />
-                  <div className="flex flex-col justify-center  px-4 w-full py-2 h-full">
-                    <h1 className="mb-2 text-2xl">
-                      {crew.name ? crew.name : crew.original_name}
-                    </h1>
-                    <h1>{crew.department}</h1>
+                <Link to={`/persondetails/${crew.id}`}>
+                  <div
+                    className="flex items-center w-full my-2 opacity-95 hover:bg-gradient-to-r from-pink-500 to-red-500 rounded-xl cursor-pointer"
+                    key={crew.credit_id}
+                  >
+                    <img
+                      src={`${BASE_IMAGE_URL}${
+                        crew.profile_path
+                          ? crew.profile_path
+                          : movie.poster_path
+                          ? movie.poster_path
+                          : movie.backdrop_path
+                      }`}
+                      className="h-[150px] w-[100px] object-contain rounded-xl"
+                      alt="Movie Poster"
+                    />
+                    <div className="flex flex-col justify-center  px-4 w-full py-2 h-full">
+                      <h1 className="mb-2 text-2xl">
+                        {crew.name ? crew.name : crew.original_name}
+                      </h1>
+                      <h1>{crew.department}</h1>
+                    </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
         </div>

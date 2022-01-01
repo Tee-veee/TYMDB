@@ -1,5 +1,5 @@
 // LIB
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // STATE
@@ -16,8 +16,7 @@ const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original/";
 function SeasonDetails() {
   const { movie, season, getMovie, getSeason, getEpisode } =
     useContext(MovieContext);
-  const { loading, setLoadingTrue, setLoadingFalse } =
-    useContext(LoadingContext);
+  const { loading } = useContext(LoadingContext);
 
   useEffect(() => {
     const sessionSeason = JSON.parse(sessionStorage.getItem("season"));
