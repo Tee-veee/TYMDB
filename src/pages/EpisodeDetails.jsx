@@ -9,13 +9,15 @@ import { Link } from "react-router-dom";
 
 // STATE
 import MovieContext from "../context/MovieContext";
+import PersonContext from "../context/PersonContext";
 import LoadingContext from "../context/LoadingContext";
 
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original/";
 
 function EpisodeDetails() {
-  const { movie, season, episode, getMovie, getSeason, getEpisode, getPerson } =
+  const { movie, season, episode, getMovie, getSeason, getEpisode } =
     useContext(MovieContext);
+  const { getPerson } = useContext(PersonContext);
   const { loading } = useContext(LoadingContext);
 
   useEffect(() => {
