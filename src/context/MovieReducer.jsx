@@ -5,8 +5,12 @@ const movieReducer = (state, action) => {
   switch (action.type) {
     case "SET_MOVIE":
       return { ...state, movie: action.payload };
-    case "SET_CREDITS":
-      return { ...state, credits: action.payload };
+    case "SET_SEASON":
+      return { ...state, season: action.payload };
+    case "SET_EPISODE":
+      return { ...state, episode: action.payload };
+    case "SET_COLLECTION":
+      return { ...state, collection: action.payload };
     default:
       return;
   }

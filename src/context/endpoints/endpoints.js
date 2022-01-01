@@ -22,6 +22,9 @@ export const detailRequests = {
   fetchDetailMovie: `?api_key=${TMDB_TOKEN}&language=en-US&append_to_response=videos,images`,
   fetchMovieCredits: `?api_key=${TMDB_TOKEN}&language=en-US`,
   fetchTvCredits: `?api_key=${TMDB_TOKEN}&language=en-US`,
+  fetchSeasonDetails: `?api_key=${TMDB_TOKEN}&language=en-US&append_to_response=videos,images`,
+  fetchEpisodeDetails: `?api_key=${TMDB_TOKEN}&language=en-US&append_to_response=videos,images`,
+  fetchCollectionDetails: `?api_key=${TMDB_TOKEN}&language=en-US&append_to_response=videos,images`,
 };
 
 // NOTES -- REQUESTS FOR MORE DETAILED PERSON RESULTS WHICH IS SET IN GLOBAL STATE (PERSON CONTEXT)

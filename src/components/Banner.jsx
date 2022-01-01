@@ -58,9 +58,7 @@ function Banner({ homePage }) {
 
   return (
     <header
-      className={`"w-full bg-black relative ${
-        homePage ? "h-[56vh]" : "h-[35vh]"
-      }`}
+      className="w-full bg-black relative h-[56vh]"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${BASE_IMAGE_URL}${

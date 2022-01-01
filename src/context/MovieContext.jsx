@@ -13,18 +13,18 @@ export const MovieProvider = ({ children }) => {
   // GLOBAL MOVIE STATE
   const initialState = {
     movie: {},
+    season: [],
+    episode: [],
+    collection: [],
   };
 
   const { setLoadingFalse, setLoadingTrue } = useContext(LoadingContext);
 
   const [state, dispatchMovies] = useReducer(movieReducer, initialState);
 
-  // TODO - ADD MOVIE ITEM TO LOCAL STORAGE EVERY TIME ITS UPDATED
-  // TODO - IDEA ONE - useEffect on this page that updates localstorage every time intialstate is updated
-  // TODO - IDEA TWO - add it to getBannerMovie and getMovie function
-
   // NOTES -- GETS BANNER MOVIE FROM BANNER COMP
   // FETCHES NETFLIX LIST, THEN GEN NUMBER FROM 0-NETFLIX ARR, AND SELECT 1 RANDOM MOVIE FROM LIST BASED OFF NUMBER GEN
+
   const getBannerMovie = async () => {
     setLoadingTrue();
     const response = await fetch(
@@ -45,10 +45,10 @@ export const MovieProvider = ({ children }) => {
     getMovie(randomMovie[0].id, randomMovie[0].release_date);
   };
 
-  // GETS MOVIE DETAILS
+  // NOTES -- GETS MOVIE DETAILS
   const getMovie = async (id, releaseDate) => {
     setLoadingTrue();
-    // IF MOVIE
+    // NOTES -- IF MOVIE
     if (releaseDate) {
       const response = await fetch(
         `${TMDB_FETCHURL}/movie/${id}${detailRequests.fetchDetailMovie}`
@@ -70,10 +70,11 @@ export const MovieProvider = ({ children }) => {
       setLoadingFalse();
       return;
     } else {
-      // IF TV SHOW
+      // NOTES -- IF TV SHOW
       const response = await fetch(
         `${TMDB_FETCHURL}/tv/${id}${detailRequests.fetchDetailTv}`
       );
+
       const data = await response.json();
       const dataCopy = { ...data };
 
@@ -93,6 +94,86 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
+  // NOTES -- TV SEASON DETAILS
+
+  const getSeason = async (id, seasonNum) => {
+    setLoadingTrue();
+    const response = await fetch(
+      `${TMDB_FETCHURL}/tv/${id}/season/${seasonNum}${detailRequests.fetchSeasonDetails}`
+    );
+
+    const data = await response.json();
+    const dataCopy = { ...data };
+
+    dispatchMovies({
+      type: "SET_SEASON",
+      payload: dataCopy,
+    });
+
+    const sessionSeason = window.sessionStorage.getItem("season");
+    if (sessionSeason === null) {
+      sessionStorage.setItem("season", JSON.stringify(dataCopy));
+    } else {
+      sessionStorage.removeItem("season");
+      sessionStorage.setItem("season", JSON.stringify(dataCopy));
+    }
+    setLoadingFalse();
+    return;
+  };
+
+  // NOTES -- TV EPISODE DETAILS
+
+  const getEpisode = async (movieID, seasonNum, episodeNum) => {
+    setLoadingTrue();
+    const response = await fetch(
+      `${TMDB_FETCHURL}/tv/${movieID}/season/${seasonNum}/episode/${episodeNum}${detailRequests.fetchEpisodeDetails}`
+    );
+
+    const data = await response.json();
+    const dataCopy = { ...data };
+
+    dispatchMovies({
+      type: "SET_EPISODE",
+      payload: dataCopy,
+    });
+
+    const sessionSeason = window.sessionStorage.getItem("episode");
+    if (sessionSeason === null) {
+      sessionStorage.setItem("episode", JSON.stringify(dataCopy));
+    } else {
+      sessionStorage.removeItem("episode");
+      sessionStorage.setItem("episode", JSON.stringify(dataCopy));
+    }
+    setLoadingFalse();
+    return;
+  };
+
+  // NOTES -- MOVIE COLLECTION DETAILS
+
+  const getCollection = async (collectionID) => {
+    setLoadingTrue();
+    const response = await fetch(
+      `${TMDB_FETCHURL}/collection/${collectionID}${detailRequests.fetchCollectionDetails}`
+    );
+    const data = await response.json();
+    const dataCopy = { ...data };
+
+    dispatchMovies({
+      type: "SET_COLLECTION",
+      payload: dataCopy,
+    });
+
+    const sessionCollection = window.sessionStorage.getItem("collection");
+    if (sessionCollection === null) {
+      sessionStorage.setItem("collection", JSON.stringify(dataCopy));
+    } else {
+      sessionStorage.removeItem("collection");
+      sessionStorage.setItem("collection", JSON.stringify(dataCopy));
+    }
+    setLoadingFalse();
+    return;
+  };
+
   // STATE WRAP
   return (
     <MovieContext.Provider
@@ -101,6 +182,9 @@ export const MovieProvider = ({ children }) => {
         getMovie,
         getBannerMovie,
         dispatchMovies,
+        getSeason,
+        getEpisode,
+        getCollection,
       }}
     >
       {children}

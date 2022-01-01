@@ -5,6 +5,7 @@ import { rowRequests } from "../context/endpoints/endpoints";
 import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
 import MovieRow from "../components/MovieRow";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -81,6 +82,7 @@ function Home() {
         title={"DOCUMENTARIES"}
         fetchUrl={rowRequests.fetchDocumentaries}
       />
+      <Footer />
     </div>
   );
 }

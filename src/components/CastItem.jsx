@@ -23,6 +23,7 @@ function CastItem({ castMem, castDetails, crewDetails, crewMem }) {
 
   return (
     <>
+      {/* NOTES -- MAP PERSONS CAST ROLES BY MOVIE */}
       {/* ADD ON CLICK TO NEW PAGE /PERSONSPAGE/ */}
       {castDetails && (
         <Link to={`/persondetails/${castMem.id}`}>
@@ -46,6 +47,7 @@ function CastItem({ castMem, castDetails, crewDetails, crewMem }) {
           </div>
         </Link>
       )}
+      {/* NOTES -- MAP PERSONS CREW ROLES BY MOVIE */}
       {/* ADD ON CLICK TO NEW PAGE /PERSONSPAGE/ */}
       {crewDetails && (
         <Link to={`/persondetails/${crewMem.id}`}>

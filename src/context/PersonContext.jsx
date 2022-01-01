@@ -17,7 +17,7 @@ export const PersonProvider = ({ children }) => {
   const initialState = {
     person: {},
     personCast: [],
-    personCrew: {},
+    personCrew: [],
   };
 
   const { setLoadingTrue, setLoadingFalse } = useContext(LoadingContext);
@@ -42,13 +42,16 @@ export const PersonProvider = ({ children }) => {
       (key) => creditsData.cast[key]
     );
 
+    // NOTES -- CONVERT OBJ TOO ARR - POSSBILE SOULTION TO (.map is not a function bug)
+
+    const creditsCrewArr = Object.keys(creditsData.crew).map(
+      (key) => creditsData.crew[key]
+    );
+
     dispatchPerson({
       type: "SET_PERSON",
       payload: detailsData,
     });
-
-    // NOTES -- ANYTHING BELOW HERE IS TESTING PURPOSE ONLY
-    // NOTES -- 31/12 -- STILL NOT NECCESSARY -- DONT DELETE YET -- HARMLESS
 
     dispatchPerson({
       type: "SET_PERSON_CAST",
@@ -56,10 +59,15 @@ export const PersonProvider = ({ children }) => {
     });
     dispatchPerson({
       type: "SET_PERSON_CREW",
-      payload: creditsData.crew,
+      payload: creditsCrewArr,
     });
 
+    // NOTES -- SET VARIABLES FOR PERSON LOCAL STORAGE
+    // NECCESARY TO HANDLE PAGE REFRESH
+
     const personDetails = window.sessionStorage.getItem("person");
+    const personCastDetails = window.sessionStorage.getItem("personCast");
+    const personCrewDetails = window.sessionStorage.getItem("personCrew");
 
     if (personDetails === null) {
       sessionStorage.setItem("person", JSON.stringify(detailsData));
@@ -68,15 +76,12 @@ export const PersonProvider = ({ children }) => {
       sessionStorage.setItem("person", JSON.stringify(detailsData));
     }
 
-    const personCastDetails = window.sessionStorage.getItem("personCast");
     if (personCastDetails === null) {
       sessionStorage.setItem("personCast", JSON.stringify(creditsData.cast));
     } else {
       sessionStorage.removeItem("personCast");
       sessionStorage.setItem("personCast", JSON.stringify(creditsData.cast));
     }
-
-    const personCrewDetails = window.sessionStorage.getItem("personCrew");
 
     if (personCrewDetails === null) {
       sessionStorage.setItem("personCrew", JSON.stringify(creditsData.crew));

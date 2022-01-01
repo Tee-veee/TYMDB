@@ -15,6 +15,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import PersonDetails from "./pages/PersonDetails";
+import SeasonDetails from "./pages/SeasonDetails";
+import EpisodeDetails from "./pages/EpisodeDetails";
+import CollectionDetails from "./pages/CollectionDetails";
 
 // STATE
 import { MovieProvider } from "./context/MovieContext";
@@ -36,6 +39,18 @@ function App() {
                 <Route
                   path="/persondetails/:person"
                   element={<PersonDetails />}
+                />
+                <Route
+                  path="/seasondetails/:tvid/:seasonid"
+                  element={<SeasonDetails />}
+                />
+                <Route
+                  path="/episodedetails/:tvid/:seasonid/:epnum"
+                  element={<EpisodeDetails />}
+                />
+                <Route
+                  path="/collectiondetails/:collectionid"
+                  element={<CollectionDetails />}
                 />
               </Routes>
             </main>
