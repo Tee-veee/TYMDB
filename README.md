@@ -6,8 +6,11 @@ TYMDB is an collection of movies presented to you in a modern style that would r
 ## why TYMDB
 to continute to utilise and showcase my front end design and development skills & creativity while concreting core react/js and design fundamentals.
 
+## using TYMDB
+designed for desktop -- will add mobile responsiveness
+
 ## currently deployed
 @ https://61d048a14b98f00008c56043--wonderful-brown-3906af.netlify.app/
 
 ## future updates
-Add search functionality and sort feature for search functionality for movies/tv/people.
+Add mobile responsiveness
