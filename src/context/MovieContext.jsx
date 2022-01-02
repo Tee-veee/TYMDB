@@ -3,7 +3,11 @@ import React, { createContext, useReducer, useContext } from "react";
 import movieReducer from "./MovieReducer";
 import LoadingContext from "./LoadingContext";
 // DATA
-import { rowRequests, detailRequests } from "./endpoints/endpoints";
+import {
+  rowRequests,
+  detailRequests,
+  searchRequests,
+} from "./endpoints/endpoints";
 
 // ENV
 const MovieContext = createContext();
@@ -16,6 +20,7 @@ export const MovieProvider = ({ children }) => {
     season: [],
     episode: [],
     collection: [],
+    search: [],
   };
 
   const { setLoadingFalse, setLoadingTrue } = useContext(LoadingContext);
@@ -131,7 +136,7 @@ export const MovieProvider = ({ children }) => {
 
     const data = await response.json();
     const dataCopy = { ...data };
-
+    console.log(dataCopy);
     dispatchMovies({
       type: "SET_EPISODE",
       payload: dataCopy,
@@ -174,6 +179,32 @@ export const MovieProvider = ({ children }) => {
     return;
   };
 
+  const getSearchMovies = async (searchText, pageNum) => {
+    setLoadingTrue();
+
+    const response = await fetch(
+      `${TMDB_FETCHURL}/search/multi${searchRequests.searchAllRequest}query=${searchText}&page=${pageNum}&include_adult=false`
+    );
+
+    const data = await response.json();
+    const dataCopy = { ...data };
+
+    dispatchMovies({
+      type: "SET_SEARCH",
+      payload: dataCopy,
+    });
+
+    const sessionSearch = window.sessionStorage.getItem("search");
+    if (sessionSearch === null) {
+      sessionStorage.setItem("search", JSON.stringify(dataCopy));
+    } else {
+      sessionStorage.removeItem("search");
+      sessionStorage.setItem("search", JSON.stringify(dataCopy));
+    }
+    setLoadingFalse();
+    return;
+  };
+
   // STATE WRAP
   return (
     <MovieContext.Provider
@@ -185,6 +216,7 @@ export const MovieProvider = ({ children }) => {
         getSeason,
         getEpisode,
         getCollection,
+        getSearchMovies,
       }}
     >
       {children}
@@ -193,3 +225,5 @@ export const MovieProvider = ({ children }) => {
 };
 
 export default MovieContext;
+
+// https://api.themoviedb.org/3/search/multi?api_key=dee6eeeff32cfd61f4b54577f4d4b264&language=en-US&query=brad&page=8&include_adult=false

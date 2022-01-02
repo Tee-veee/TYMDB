@@ -33,3 +33,9 @@ export const personRequests = {
   personDetails: `?api_key=${TMDB_TOKEN}&language=en-US&append_to_response=%26append_to_response=videos,images`,
   personCredits: `/combined_credits?api_key=${TMDB_TOKEN}&language=en-US`,
 };
+
+// NOTES -- SEARCH REQUESTS
+
+export const searchRequests = {
+  searchAllRequest: `?api_key=${TMDB_TOKEN}&language=en-US&`,
+};

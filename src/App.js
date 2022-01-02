@@ -18,6 +18,7 @@ import PersonDetails from "./pages/PersonDetails";
 import SeasonDetails from "./pages/SeasonDetails";
 import EpisodeDetails from "./pages/EpisodeDetails";
 import CollectionDetails from "./pages/CollectionDetails";
+import Search from "./pages/Search";
 
 // STATE
 import { MovieProvider } from "./context/MovieContext";
@@ -52,6 +53,7 @@ function App() {
                   path="/collectiondetails/:collectionid"
                   element={<CollectionDetails />}
                 />
+                <Route path="/search/:query" element={<Search />} />
               </Routes>
             </main>
           </PersonProvider>

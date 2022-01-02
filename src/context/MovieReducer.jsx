@@ -11,6 +11,8 @@ const movieReducer = (state, action) => {
       return { ...state, episode: action.payload };
     case "SET_COLLECTION":
       return { ...state, collection: action.payload };
+    case "SET_SEARCH":
+      return { ...state, search: action.payload };
     default:
       return;
   }
