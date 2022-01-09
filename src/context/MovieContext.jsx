@@ -225,5 +225,3 @@ export const MovieProvider = ({ children }) => {
 };
 
 export default MovieContext;
-
-// https://api.themoviedb.org/3/search/multi?api_key=dee6eeeff32cfd61f4b54577f4d4b264&language=en-US&query=brad&page=8&include_adult=false
