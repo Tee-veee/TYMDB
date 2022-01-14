@@ -18,6 +18,6 @@ designed for desktop
 ![SLIDE3!](https://user-images.githubusercontent.com/81460374/149462494-dbc8bb42-a2b4-4eb2-8d39-dff026c78e0a.png)
 ![SLIDE4!](https://user-images.githubusercontent.com/81460374/149462533-0045e2ee-e35d-40ff-a394-da19aa123620.png)
 ![SLIDE5!](https://user-images.githubusercontent.com/81460374/149462554-f3783072-6579-4a12-a332-961090f80967.png)
-![SLIDE6!](https://user-images.githubusercontent.com/81460374/149462578-a6d77ee6-bc15-4df1-a84e-5a6288be125d.png)
+
 
 
